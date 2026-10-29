@@ -1,0 +1,330 @@
+/* ============================================================
+   ESTRUCTURA GENERAL Y HOST
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #f8fafc;
+  color: #1e293b;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 240px;
+  background-color: #0f172a;
+  color: #ffffff;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.menu-lista {
+  list-style: none;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.875rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.menu-link:hover, .menu-link.activo {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+/* PANEL PRINCIPAL */
+.panel-principal {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+}
+
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.acciones-encabezado {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.titulo-pagina h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.titulo-pagina p {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+/* METRICAS KPI */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.kpi-card {
+  background-color: #ffffff;
+  padding: 1.25rem;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.kpi-icono {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.kpi-entrada .kpi-icono { background-color: #dcfce7; }
+.kpi-salida .kpi-icono { background-color: #fee2e2; }
+.kpi-ajuste .kpi-icono { background-color: #e0f2fe; }
+
+.kpi-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.kpi-titulo {
+  font-size: 0.8125rem;
+  color: #64748b;
+}
+
+.kpi-monto {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-top: 0.2rem;
+}
+
+/* FILTROS */
+.tarjeta-filtro {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+.form-filtros {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.campo-grupo {
+  border: none;
+}
+
+.campo-busqueda {
+  flex: 2;
+  min-width: 240px;
+}
+
+.input-texto, .input-select {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  outline: none;
+  background-color: #ffffff;
+}
+
+.input-texto:focus, .input-select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* TABLA KARDEX */
+.tarjeta-tabla {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.tabla th, .tabla td {
+  padding: 0.875rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.tabla th {
+  color: #64748b;
+  font-weight: 600;
+  background-color: #f8fafc;
+}
+
+code {
+  background-color: #f1f5f9;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: #334155;
+  font-weight: 600;
+}
+
+/* BADGES DE TIPO DE MOVIMIENTO */
+.badge {
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.badge-entrada { background-color: #dcfce7; color: #15803d; }
+.badge-salida { background-color: #f1f5f9; color: #334155; }
+.badge-baja { background-color: #fee2e2; color: #b91c1c; }
+.badge-ajuste { background-color: #e0f2fe; color: #0369a1; }
+
+.texto-positivo { color: #16a34a; font-weight: 700; }
+.texto-negativo { color: #dc2626; font-weight: 700; }
+
+/* BOTONES */
+.btn {
+  padding: 0.65rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-primario { background-color: #2563eb; color: #ffffff; }
+.btn-primario:hover { background-color: #1d4ed8; }
+
+.btn-secundario { background-color: #e2e8f0; color: #475569; }
+.btn-secundario:hover { background-color: #cbd5e1; }
+
+/* MODAL */
+.modal {
+  margin: auto;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  max-width: 500px;
+  width: 90%;
+}
+
+.modal::backdrop { background-color: rgba(15, 23, 42, 0.5); }
+.modal-contenido { padding: 1.5rem; }
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.btn-cerrar {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #94a3b8;
+}
+
+.form-grid {
+  border: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.campo-frecuente label {
+  display: block;
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 0.3rem;
+}
+
+.campo-full { grid-column: span 2; }
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  body.admin-layout { flex-direction: column; }
+  .sidebar { width: 100%; }
+  .panel-principal { padding: 1rem; }
+  .encabezado { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
